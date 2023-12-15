@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Portfolio Optimization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .results-header {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #efefef;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Portfolio Optimization</h1>
+        <form method="post">
+            <label for="stocks">Enter stock symbols (separated by commas):</label>
+            <input type="text" id="stocks" name="stocks" placeholder="e.g., AAPL, MSFT" required>
+            <input type="submit" value="Optimize">
+        </form>
+
+        {% if errors %}
+            <p class="error-message">Error: {{ errors }}</p>
+        {% endif %}
+
+        {% if results %}
+            <h2 class="results-header">Optimal Portfolio Weights:</h2>
+            <ul>
+                {% for stock, weight in results.weights.items() %}
+                    <li>{{ stock }}: {{ weight|round(2) }}%</li>
+                {% endfor %}
+            </ul>
+            <p>Expected Annual Return: {{ results.exp_return|round(4) }}</p>
+            <p>Expected Annual Volatility: {{ results.exp_volatility|round(4) }}</p>
+            <p>Expected Sharpe Ratio: {{ results.exp_sharpe|round(4) }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
