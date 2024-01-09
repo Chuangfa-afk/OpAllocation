@@ -64,7 +64,7 @@ Contributions are welcome to help extend the functionality and improve OpAllocat
 
 ## License
 
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the Ronka LLC license.
 
 ## Disclaimer
 
